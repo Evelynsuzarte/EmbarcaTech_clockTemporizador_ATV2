@@ -49,7 +49,7 @@ int main()
     
 
 
-
+// controle de bouncing do botao
 void callback_botao(uint gpio, uint32_t events){
     if (gpio == BOTAO) {
         sleep_ms(50);
@@ -59,11 +59,12 @@ void callback_botao(uint gpio, uint32_t events){
     }
 }
 
+//apaga as leds e espera o tempo para a próxima
 int64_t apaga_leds(alarm_id_t id, void *user_data) {
     if (estado == 3) {
         gpio_put(LED_VM, 0);
         estado = 2;
-         printf("LED azul apagado\n");
+        printf("LED azul apagado\n");
         add_alarm_in_ms(3000, apaga_leds, NULL, false);
     } else if (estado == 2) {
         gpio_put(LED_AZ, 0);
